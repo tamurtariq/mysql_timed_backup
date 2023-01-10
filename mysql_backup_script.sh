@@ -45,3 +45,5 @@ do
     echo "Skipping $DBNAME..."
   fi
 done
+# S3 upload process
+aws s3 cp $BACKUPDIR/$DATEFORMAT-$DBNAME.sql.gz s3://revage-mysql-backups/
