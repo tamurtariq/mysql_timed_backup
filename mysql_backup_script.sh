@@ -5,7 +5,7 @@ DBPASS="password"
 DBNAME="DB_Name"
 BACKUPROOT="/data/mysqlbackup"
 
-DATEFORMAT=`date +%F`
+DATEFORMAT=`date +%F_%T`
 BACKUPDIR="${BACKUPROOT}/${DATEFORMAT}"
 KEEP_BACKUPS_FOR=14 #days
 
@@ -29,8 +29,8 @@ elif [ ! -w ${BACKUPDIR} ]; then
   exit 1
 fi
 
-    mysqldump -u $DBUSER -p$DBPASS $DBNAME | gzip > $BACKUPDIR/$DATEFORMAT_$DBNAME.sql.gz
+    mysqldump -u $DBUSER -p$DBPASS $DBNAME | gzip > $BACKUPDIR/$DATEFORMAT-$DBNAME.sql.gz
     echo "Database $DBNAME backed up."
  
 # S3 upload process
-aws s3 cp $BACKUPDIR/$DATEFORMAT_$DBNAME.sql.gz s3://revage-mysql-backups/
+aws s3 cp $BACKUPDIR/$DATEFORMAT-$DBNAME.sql.gz s3://revage-mysql-backups/
