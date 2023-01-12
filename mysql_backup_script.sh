@@ -2,20 +2,13 @@
 
 DBUSER="mysqlbackup"
 DBPASS="password"
-DONTBACKUP=( "mysql" "information_schema" "performance_schema" "test" )
+DBNAME="DB_Name"
 BACKUPROOT="/data/mysqlbackup"
 
 DATEFORMAT=`date +%F`
 BACKUPDIR="${BACKUPROOT}/${DATEFORMAT}"
 KEEP_BACKUPS_FOR=14 #days
 
-DBS="$(mysql -u $DBUSER -p$DBPASS -Bse 'show databases')"
-
-containsElement () {
-  local e
-  for e in "${@:2}"; do [[ "$e" == "$1" ]] && return 0; done
-  return 1
-}
 
 echo "Cleaning up backup directory..."
 find $BACKUPROOT -type d -ctime +$KEEP_BACKUPS_FOR -exec rm -rf {} +
@@ -36,14 +29,8 @@ elif [ ! -w ${BACKUPDIR} ]; then
   exit 1
 fi
 
-for DBNAME in $DBS
-do
-  if ! containsElement "$DBNAME" "${DONTBACKUP[@]}"; then
-    mysqldump -u $DBUSER -p$DBPASS $DBNAME | gzip > $BACKUPDIR/$DATEFORMAT-$DBNAME.sql.gz
+    mysqldump -u $DBUSER -p$DBPASS $DBNAME | gzip > $BACKUPDIR/$DATEFORMAT_$DBNAME.sql.gz
     echo "Database $DBNAME backed up."
-  else
-    echo "Skipping $DBNAME..."
-  fi
-done
+ 
 # S3 upload process
-aws s3 cp $BACKUPDIR/$DATEFORMAT-$DBNAME.sql.gz s3://revage-mysql-backups/
+aws s3 cp $BACKUPDIR/$DATEFORMAT_$DBNAME.sql.gz s3://revage-mysql-backups/
