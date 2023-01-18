@@ -5,7 +5,7 @@ Mysql backup and deletion of old backup
 2. configure aws cli with the user credentials
     once aws cli is installed configure the aws cli for login with following command
      > aws configure
-     it will ask for the following
+     # it will ask for the following
 
     Secret key:    dMS+0HVK4jqpIZ3iAbbEBbql/XZH7ThxUA7G/zpd
     Access key:     AKIAQWYXJZ3LWHFRKGVJ
