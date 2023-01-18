@@ -7,11 +7,12 @@ Mysql backup and deletion of old backup
      > aws configure
      # it will ask for the following
 
-    Secret key:    dMS+0HVK4jqpIZ3iAbbEBbql/XZH7ThxUA7G/zpd
-    Access key:     AKIAQWYXJZ3LWHFRKGVJ
-    Default region name [None]: us-east-2
-    Default output format [None]: json
+    Secret key:    dMS+0HVK4jqpIZ3iAbbEBbql/XZH7ThxUA7G/zpd  __
+    Access key:     AKIAQWYXJZ3LWHFRKGVJ  __
+    Default region name [None]: us-east-2  __
+    Default output format [None]: json  __
 
 3. add cronjob in system for timed backup process
-    run command as root # crontab -e     add the following at the end of the file
+    run command as root # crontab -e     __
+    add the following at the end of the file
     * * * * * bash /path-to-script/mysql_backup_script.sh
