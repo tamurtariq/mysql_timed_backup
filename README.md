@@ -7,8 +7,8 @@ Mysql backup and deletion of old backup
      > aws configure
      # it will ask for the following
 
-    Secret key:    dMS+0HVK4jqpIZ3iAbbEBbql/XZH7ThxUA7G/zpd <br />
-    Access key:     AKIAQWYXJZ3LWHFRKGVJ  <br />
+    Secret key:    dMS+0HVK4jqpIZ3iAb------ <br />
+    Access key:     AKIAQWYXJZ3LWHxxxxxx  <br />
     Default region name [None]: us-east-2  <br />
     Default output format [None]: json  <br />
 
